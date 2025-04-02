@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="FreSca: Unveiling the Scaling Space in Diffusion Models">
+  <meta name="keywords" content="diffusion models, zero-shot improvement, plug-and-play">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Marigold Depth">
+  <meta name="twitter:description" content="FreSca: Unveiling the Scaling Space in Diffusion Models">
+  <meta name="twitter:creator" content="@AntonObukhov1">
+
+  <title>FreSca: Unveiling the Scaling Space in Diffusion Models</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1FWSVCGZTG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-1FWSVCGZTG');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/bulma.min.css">
+  <link rel="stylesheet" href="./css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./css/twentytwenty.css">
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="icon" href="./images/favicon.svg">
+
+  <script src="./js/jquery-3.2.1.min.js"></script>
+  <script src="./js/jquery.event.move.js"></script>
+  <script src="./js/jquery.twentytwenty.js"></script>
+  <script src="./js/bulma-carousel.min.js"></script>
+  <script src="./js/bulma-slider.min.js"></script>
+  <script src="./js/fontawesome.all.min.js"></script>
+
+  <!--MathJax-->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">FreSca: Unveiling the Scaling Space in Diffusion Models</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://wikichao.github.io/" target="_blank" rel="noopener noreferrer">
+                Chao Huang</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://liangsusan-git.github.io/" target="_blank" rel="noopener noreferrer">
+                Susan Liang</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://yunlong10.github.io/" target="_blank" rel="noopener noreferrer">
+                Yunlong Tang</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://limacv.github.io/homepage/" target="_blank" rel="noopener noreferrer">
+                Li Ma</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.yapengtian.com/" target="_blank" rel="noopener noreferrer">
+                Yapeng Tian</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.cs.rochester.edu/~cxu22/" target="_blank" rel="noopener noreferrer">
+                Chenliang Xu</a>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">University of Rochester, Netflix Eyeline Studios, The University of Texas at Dallas</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="" target="_blank" rel="noopener noreferrer"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf" style="color: orangered"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/WikiChao/FreSca" target="_blank" rel="noopener noreferrer"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>
+                    Code
+                  </span>
+                  <!-- <img
+                          src="https://img.shields.io/github/stars/prs-eth/marigold?style=for-the-badge&label=&color=333333&labelColor=333333" alt="GitHub stars"
+                          style="margin-top: 3px;"
+                  >
+                  <span>
+                    stars
+                  </span> -->
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h2 class="subtitle has-text-centered">
+        <span class="methodname">FreSca</span> is a frequency-domain scaling technique that provides a zero-shot performance boost to diffusion-based applications like depth estimation and image editing without requiring retraining.
+      </h2>
+      <img id="teaser" width="100%" src="./images/teaser.png" alt="Teaser image demonstrating FreSca's effect."/>
+    </div>
+  </div>
+</section>
+
+
+<!-- <section class="section pt-0 pb-4">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Gallery</h2>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- <section class="hero is-light is-small mt-4">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel-horizontal" class="carousel results-carousel">
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/Bee_Collecting_Pollen_2004-08-14.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/Bee_Collecting_Pollen_2004-08-14_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/Bee_Collecting_Pollen_2004-08-14_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/Bee_Collecting_Pollen_2004-08-14_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/img_20190728_112601_178_720_crop43.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/img_20190728_112601_178_720_crop43_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/img_20190728_112601_178_720_crop43_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/img_20190728_112601_178_720_crop43_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/flowers-4430651_1280_crop43.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/flowers-4430651_1280_crop43_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/flowers-4430651_1280_crop43_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/flowers-4430651_1280_crop43_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/PIXNIO-2941099-1344x896_crop43.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/PIXNIO-2941099-1344x896_crop43_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/PIXNIO-2941099-1344x896_crop43_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/PIXNIO-2941099-1344x896_crop43_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/IMG_8330_crop43.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/IMG_8330_crop43_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/IMG_8330_crop43_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/IMG_8330_crop43_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/CatLoki2_crop43.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/CatLoki2_crop43_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/CatLoki2_crop43_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/CatLoki2_crop43_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/dalle_3_crop43.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/dalle_3_crop43_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/dalle_3_crop43_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/dalle_3_crop43_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/Lincoln_Cathedral_Chapter_House.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/Lincoln_Cathedral_Chapter_House_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/Lincoln_Cathedral_Chapter_House_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/Lincoln_Cathedral_Chapter_House_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/Marianische_Männerkongregation_Munich_crop43.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/Marianische_Männerkongregation_Munich_crop43_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/Marianische_Männerkongregation_Munich_crop43_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/Marianische_Männerkongregation_Munich_crop43_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/img_20190728_112611_045_720_crop43.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/img_20190728_112611_045_720_crop43_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/img_20190728_112611_045_720_crop43_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/img_20190728_112611_045_720_crop43_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/PIA15279_3rovers-stand_D2011_1215_D521_crop43.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/PIA15279_3rovers-stand_D2011_1215_D521_crop43_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/PIA15279_3rovers-stand_D2011_1215_D521_crop43_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/PIA15279_3rovers-stand_D2011_1215_D521_crop43_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/STS_114_day_before_launch_crop43.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/STS_114_day_before_launch_crop43_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/STS_114_day_before_launch_crop43_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/STS_114_day_before_launch_crop43_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/Cucurbita_2011_G1.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/Cucurbita_2011_G1_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/Cucurbita_2011_G1_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/Cucurbita_2011_G1_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/USS_Bunker_Hill_hit_by_two_Kamikazes_crop43.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/USS_Bunker_Hill_hit_by_two_Kamikazes_crop43_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/USS_Bunker_Hill_hit_by_two_Kamikazes_crop43_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/USS_Bunker_Hill_hit_by_two_Kamikazes_crop43_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/WechatIMG1284_crop43.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/WechatIMG1284_crop43_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/WechatIMG1284_crop43_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/WechatIMG1284_crop43_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/WechatIMG17527_crop43.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/WechatIMG17527_crop43_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/WechatIMG17527_crop43_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/WechatIMG17527_crop43_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/woodland_path_crop43.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/woodland_path_crop43_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/woodland_path_crop43_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/woodland_path_crop43_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="hero-body pt-0">
+    <div class="container">
+      <div id="results-carousel-vertical" class="carousel results-carousel">
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/8A10BC4E-4963-4885-8F30-8B28F3F8AB2B-78098-0000351063D6ECE7_crop43.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/8A10BC4E-4963-4885-8F30-8B28F3F8AB2B-78098-0000351063D6ECE7_crop43_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/8A10BC4E-4963-4885-8F30-8B28F3F8AB2B-78098-0000351063D6ECE7_crop43_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/8A10BC4E-4963-4885-8F30-8B28F3F8AB2B-78098-0000351063D6ECE7_crop43_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/DJI_0189_crop43.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/DJI_0189_crop43_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/DJI_0189_crop43_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/DJI_0189_crop43_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/DJI_0221-HDR_crop_crop43.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/DJI_0221-HDR_crop_crop43_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/DJI_0221-HDR_crop_crop43_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/DJI_0221-HDR_crop_crop43_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/DSC00058-HDR_crop43.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/DSC00058-HDR_crop43_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/DSC00058-HDR_crop43_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/DSC00058-HDR_crop43_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/DSC01162_crop43.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/DSC01162_crop43_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/DSC01162_crop43_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/DSC01162_crop43_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/DSC00152-HDR_crop43.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/DSC00152-HDR_crop43_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/DSC00152-HDR_crop43_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/DSC00152-HDR_crop43_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/IMG-20231111-WA0001.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/IMG-20231111-WA0001_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/IMG-20231111-WA0001_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/IMG-20231111-WA0001_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/img_0810_crop43.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/img_0810_crop43_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/img_0810_crop43_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/img_0810_crop43_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/IMG_7860-Edit_crop43.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/IMG_7860-Edit_crop43_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/IMG_7860-Edit_crop43_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/IMG_7860-Edit_crop43_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/IMG_20230223_201232.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/IMG_20230223_201232_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/IMG_20230223_201232_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/IMG_20230223_201232_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/IMG_20230531_162636.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/IMG_20230531_162636_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/IMG_20230531_162636_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/IMG_20230531_162636_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/IMG_20230818_201603.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/IMG_20230818_201603_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/IMG_20230818_201603_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/IMG_20230818_201603_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/marigold-4549334_1280.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/marigold-4549334_1280_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/marigold-4549334_1280_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/marigold-4549334_1280_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/pete-walls-92JRuvQZfKs-unsplash_crop43.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/pete-walls-92JRuvQZfKs-unsplash_crop43_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/pete-walls-92JRuvQZfKs-unsplash_crop43_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/pete-walls-92JRuvQZfKs-unsplash_crop43_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/S-IC_engines_and_Von_Braun_crop43.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/S-IC_engines_and_Von_Braun_crop43_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/S-IC_engines_and_Von_Braun_crop43_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/S-IC_engines_and_Von_Braun_crop43_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/Ticino_crop43.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/Ticino_crop43_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/Ticino_crop43_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/Ticino_crop43_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/WechatIMG1282.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/WechatIMG1282_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/WechatIMG1282_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/WechatIMG1282_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/WechatIMG17503.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/WechatIMG17503_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/WechatIMG17503_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/WechatIMG17503_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/WechatIMG17509.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/WechatIMG17509_ours.jpg">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <img src="./images/inthewild/WechatIMG17509_leres.jpg">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/inthewild/WechatIMG17509_ours.jpg">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Method. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">How it works</h2>
+        <div class="content has-text-justified">
+
+          <p>
+            Given a diffusion model, it naturally incorporates a "scaling space," which is defined by two key components: (1) the noise predictions $\epsilon$ which capture the semantics of the image, and (2) the classifier-free guidance $\omega$ which scales these noise predictions to amplify or suppress specific semantic features. FreSca leverages this scaling space by applying frequency-dependent scaling factors to different components of the model's noise predictions.
+          </p>
+
+          <div class="has-text-centered">
+            <img id="method_train" width="75%" src="./images/method.png" alt="FreSca method overview"/>
+          </div>
+
+          <p>
+            Given a noisy image $x_t$ at timestep $t$, we first calculate the noise prediction difference $\Delta\epsilon_t$ between the conditional and unconditional predictions. This difference captures the semantic signal. To manipulate this signal in the frequency domain, we apply a Fast Fourier Transform (FFT) to decompose $\Delta\epsilon_t$ into its spectral components. We then apply separate scaling factors: $l$ for low-frequency components (which control overall structure) and $h$ for high-frequency components (which control details and textures). After frequency-domain scaling, we apply the inverse FFT to obtain the modified noise prediction, which is used in the standard diffusion sampling equation to produce $x_{t-1}$. This simple yet effective approach allows precise control over different aspects of the generated content without requiring model retraining.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Method. -->
+  </div>
+</section>
+
+
+<script>
+  $(window).on('load', function() {
+    bulmaCarousel.attach('#results-carousel-horizontal', {
+      slidesToScroll: 1,
+      slidesToShow: 3,
+      loop: true,
+      autoplay: true,
+    });
+
+    bulmaCarousel.attach('#results-carousel-vertical', {
+      slidesToScroll: 1,
+      slidesToShow: 5,
+      loop: true,
+      autoplay: true,
+    });
+
+    bulmaCarousel.attach('#results-carousel-testimonials', {
+      slidesToScroll: 1,
+      slidesToShow: 3,
+      loop: true,
+      autoplay: true,
+      breakpoints: [
+        {
+          changePoint: 50 + 260 * 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          loop: true,
+          autoplay: true,
+        },
+        {
+          changePoint: 50 + 260 * 3,
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          loop: true,
+          autoplay: true,
+        },
+        {
+          changePoint: 50 + 260 * 4,
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          loop: true,
+          autoplay: true,
+        }
+      ],
+    });
+
+    $(".twentytwenty-container-top").twentytwenty({
+      before_label: 'Input',
+      after_label: 'Ours',
+      default_offset_pct: 0.75,
+    });
+
+    $(".twentytwenty-container-bottom").twentytwenty({
+      before_label: 'LeRes',
+      after_label: 'Ours',
+      default_offset_pct: 0.5,
+    });
+
+    $('.results-carousel').css({
+      'max-height': '2000px',
+      'visibility': 'visible'
+    });
+  });
+</script>
+
+<!-- <section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Citation</h2>
+    <pre class="selectable"><code>
+}</code></pre>
+  </div>
+</section> -->
+
+<footer class="footer pt-4 pb-0">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            Website template based on
+            <a href="https://github.com/nerfies/nerfies.github.io">
+              Nerfies
+            </a>
+            and licensed under
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+              CC-BY-SA-4.0
+            </a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
