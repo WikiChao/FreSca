@@ -144,8 +144,13 @@ class DiffusionModel:
 ```
 
 
-<!-- ## 📑 Citation
+## 📑 Citation
 If you use this code for your research, please cite our work:
 ```
-
-``` -->
+@article{huang2025fresca,
+        title={FreSca: Unveiling the Scaling Space in Diffusion Models},
+        author={Huang, Chao and Liang, Susan and Tang, Yunlong and Ma, Li and Tian, Yapeng and Xu, Chenliang},
+        journal={arXiv preprint arXiv:2504.02154},
+        year={2025}
+}
+```
