@@ -11,6 +11,10 @@
 
 </h5>
 
+<p align="center">
+  <img src="assets/teaser.png" alt="FreSca teaser figure" width="100%">
+</p>
+
 ## 📰 News
 
 * **[2025.04]** 🔥🔥 Released example implemenation for **FreSca**.
