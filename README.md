@@ -24,8 +24,40 @@
 - [x] Add implementation for the core algorithm
 - [x] Update demo for image editing (e.g., LEdits++)
 - [x] Update demo for diffusion-based image depth estimation (e.g., Marigold)
+- [x] Add gallery section with VideoCrafter2 video generation results
+
 - [ ] Include more applications...
-  
+
+## 🎬 Gallery
+
+### Video Generation Results
+
+<table>
+<tr>
+    <td colspan="3" align="center"><b>VideoCrafter2 (Original)</b></td>
+</tr>
+<tr>
+    <td><a href="assets/VideoCrafter2/Origin/0001.mp4"><img src="assets/VideoCrafter2/Origin/0001.gif" width="100%"></a></td>
+    <td><a href="assets/VideoCrafter2/Origin/0004.mp4"><img src="assets/VideoCrafter2/Origin/0004.gif" width="100%"></a></td>
+    <td><a href="assets/VideoCrafter2/Origin/0005.mp4"><img src="assets/VideoCrafter2/Origin/0005.gif" width="100%"></a></td>
+</tr>
+<tr>
+    <td colspan="3" align="center"><b>VideoCrafter2 + FreSca</b></td>
+</tr>
+<tr>
+    <td><a href="assets/VideoCrafter2/Fresca/0001.mp4"><img src="assets/VideoCrafter2/Fresca/0001.gif" width="100%"></a></td>
+    <td><a href="assets/VideoCrafter2/Fresca/0004.mp4"><img src="assets/VideoCrafter2/Fresca/0004.gif" width="100%"></a></td>
+    <td><a href="assets/VideoCrafter2/Fresca/0005.mp4"><img src="assets/VideoCrafter2/Fresca/0005.gif" width="100%"></a></td>
+</tr>
+<tr>
+    <td align="center"><i>"A tiger walks in the forest, photorealistic, 4k, high definition"</i></td>
+    <td align="center"><i>"A child excitedly swings on a rusty swing set, laughter filling the air"</i></td>
+    <td align="center"><i>"A young woman with glasses is jogging in the park wearing a pink headband"</i></td>
+</tr>
+</table>
+
+<p align="left"><i>Click on any GIF to view the full MP4 video.</i></p>
+
 ## 🤖 FreSca Implementation
 ```python
 import torch
