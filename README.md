@@ -37,17 +37,17 @@
     <td colspan="3" align="center"><b>VideoCrafter2 (Original)</b></td>
 </tr>
 <tr>
-    <td><a href="assets/VideoCrafter2/Origin/0001.mp4"><img src="assets/VideoCrafter2/Origin/0001.gif" width="100%"></a></td>
-    <td><a href="assets/VideoCrafter2/Origin/0004.mp4"><img src="assets/VideoCrafter2/Origin/0004.gif" width="100%"></a></td>
-    <td><a href="assets/VideoCrafter2/Origin/0005.mp4"><img src="assets/VideoCrafter2/Origin/0005.gif" width="100%"></a></td>
+    <td><a href="demo/VideoCrafter2/Origin/0001.mp4"><img src="demo/VideoCrafter2/Origin/0001.gif" width="100%"></a></td>
+    <td><a href="demo/VideoCrafter2/Origin/0004.mp4"><img src="demo/VideoCrafter2/Origin/0004.gif" width="100%"></a></td>
+    <td><a href="demo/VideoCrafter2/Origin/0005.mp4"><img src="demo/VideoCrafter2/Origin/0005.gif" width="100%"></a></td>
 </tr>
 <tr>
     <td colspan="3" align="center"><b>VideoCrafter2 + FreSca</b></td>
 </tr>
 <tr>
-    <td><a href="assets/VideoCrafter2/Fresca/0001.mp4"><img src="assets/VideoCrafter2/Fresca/0001.gif" width="100%"></a></td>
-    <td><a href="assets/VideoCrafter2/Fresca/0004.mp4"><img src="assets/VideoCrafter2/Fresca/0004.gif" width="100%"></a></td>
-    <td><a href="assets/VideoCrafter2/Fresca/0005.mp4"><img src="assets/VideoCrafter2/Fresca/0005.gif" width="100%"></a></td>
+    <td><a href="demo/VideoCrafter2/Fresca/0001.mp4"><img src="demo/VideoCrafter2/Fresca/0001.gif" width="100%"></a></td>
+    <td><a href="demo/VideoCrafter2/Fresca/0004.mp4"><img src="demo/VideoCrafter2/Fresca/0004.gif" width="100%"></a></td>
+    <td><a href="demo/VideoCrafter2/Fresca/0005.mp4"><img src="demo/VideoCrafter2/Fresca/0005.gif" width="100%"></a></td>
 </tr>
 <tr>
     <td align="center"><i>"A tiger walks in the forest, photorealistic, 4k, high definition"</i></td>
