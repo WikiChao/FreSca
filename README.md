@@ -19,6 +19,9 @@
 
 * **[2025.04]** 🔥🔥 Released example implemenation for **FreSca**.
 
+## 🖥️ Demo
+
+* You can try the demo applications in ``demo/*``.
 
 ## ✅ ToDo
 - [x] Add implementation for the core algorithm
