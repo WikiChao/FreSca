@@ -1,13 +1,19 @@
 <h1 align="center">FreSca: Unveiling the Scaling Space in Diffusion Models</h1>
 <h5 align="center" style="color:gray">
-  Chao Huang, Susan Liang, Yunlong Tang, Li Ma, Yapeng Tian, Chenliang Xu<br></h5>
+  <a href="https://wikichao.github.io/" target="_blank" rel="noopener noreferrer">Chao Huang</a>, 
+  <a href="https://liangsusan-git.github.io/" target="_blank" rel="noopener noreferrer">Susan Liang</a>, 
+  <a href="https://yunlong10.github.io/" target="_blank" rel="noopener noreferrer">Yunlong Tang</a>, 
+  <a href="https://limacv.github.io/homepage/" target="_blank" rel="noopener noreferrer">Li Ma</a>, 
+  <a href="https://www.yapengtian.com/" target="_blank" rel="noopener noreferrer">Yapeng Tian</a>, 
+  <a href="https://www.cs.rochester.edu/~cxu22/" target="_blank" rel="noopener noreferrer">Chenliang Xu</a><br>
+</h5>
 <h5 align="center" style="color:gray">
   University of Rochester, Netflix Eyeline Studios, The University of Texas at Dallas
 </h5>
 <h5 align="center"> If our project helps you, please give us a star ⭐ on GitHub to support us. </h5>
 
 <h5 align="center">
-<a href="https://wikichao.github.io/FreSca/"><img src="https://img.shields.io/static/v1?label=Project&message=Website&color=red" height=20.5></a>  <a href="https://arxiv.org/pdf/2504.02154"><img src="https://img.shields.io/badge/arXiv-FreSca-b31b1b.svg" height=20.5></a> <img src="https://visitor-badge.laobi.icu/badge?page_id=Wikichao.FreSca" alt="visitor badge"/>  
+<a href="https://wikichao.github.io/FreSca/"><img src="https://img.shields.io/static/v1?label=Project&message=Website&color=red" height=20.5></a>  <a href="https://arxiv.org/pdf/2504.02154"><img src="https://img.shields.io/badge/arXiv-FreSca-b31b1b.svg" height=20.5></a> <a href="https://huggingface.co/papers/2504.02154"><img src="https://img.shields.io/static/v1?label=HuggingFace&message=Paper&color=green" height=20.5></a> 
 
 </h5>
 
@@ -16,6 +22,8 @@
 </p>
 
 ## 📰 News
+
+- **[2025-04]** 🔥🔥 Exciting discovery! **FreSca** boosts video diffusion models' performance without training! Preliminary [VideoCrafter2](https://github.com/AILab-CVC/VideoCrafter) results added. Suggestions for new tasks are welcome—gallery updates coming soon 🚀🚀
 
 * **[2025.04]** 🔥🔥 Released example implemenation for **FreSca**.
 
