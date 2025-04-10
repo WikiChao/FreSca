@@ -27,18 +27,6 @@
 
 * **[2025.04]** 🔥🔥 Released example implemenation for **FreSca**.
 
-## 🖥️ Demo
-
-* You can try the demo applications in ``demo/*``.
-
-## ✅ ToDo
-- [x] Add implementation for the core algorithm
-- [x] Update demo for image editing (e.g., LEdits++)
-- [x] Update demo for diffusion-based image depth estimation (e.g., Marigold)
-- [x] Add gallery section with VideoCrafter2 video generation results
-
-- [ ] Include more applications...
-
 ## 🎬 Gallery
 
 ### Video Generation Results
@@ -68,6 +56,10 @@
 </table>
 
 <p align="left"><i>Click on any GIF to view the full MP4 video.</i></p>
+
+## 🖥️ Demo
+
+* You can try the demo applications in ``demo/*``.
 
 ## 🤖 FreSca Implementation
 ```python
@@ -154,6 +146,13 @@ class DiffusionModel:
         # Continue with the rest of the denoising step...
 ```
 
+## ✅ ToDo
+- [x] Add implementation for the core algorithm
+- [x] Update demo for image editing (e.g., LEdits++)
+- [x] Update demo for diffusion-based image depth estimation (e.g., Marigold)
+- [x] Add gallery section with VideoCrafter2 video generation results
+
+- [ ] Include more applications...
 
 ## 📑 Citation
 If you use this code for your research, please cite our work:
