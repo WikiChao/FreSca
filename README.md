@@ -1,8 +1,9 @@
-<h1 align="center">FreSca: Unveiling the Scaling Space in Diffusion Models</h1>
+<h1 align="center">FreSca: Scaling in Frequency Space Enhances Diffusion Models</h1>
 <h5 align="center" style="color:gray">
   <a href="https://wikichao.github.io/" target="_blank" rel="noopener noreferrer">Chao Huang</a>, 
   <a href="https://liangsusan-git.github.io/" target="_blank" rel="noopener noreferrer">Susan Liang</a>, 
   <a href="https://yunlong10.github.io/" target="_blank" rel="noopener noreferrer">Yunlong Tang</a>, 
+  <a href="https://scholar.google.com/citations?user=ZyCYhUkAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Jing Bi</a>, 
   <a href="https://limacv.github.io/homepage/" target="_blank" rel="noopener noreferrer">Li Ma</a>, 
   <a href="https://www.yapengtian.com/" target="_blank" rel="noopener noreferrer">Yapeng Tian</a>, 
   <a href="https://www.cs.rochester.edu/~cxu22/" target="_blank" rel="noopener noreferrer">Chenliang Xu</a><br>
@@ -14,18 +15,35 @@
 
 <h5 align="center">
 <a href="https://wikichao.github.io/FreSca/"><img src="https://img.shields.io/static/v1?label=Project&message=Website&color=red" height=20.5></a>  <a href="https://arxiv.org/pdf/2504.02154"><img src="https://img.shields.io/badge/arXiv-FreSca-b31b1b.svg" height=20.5></a> <a href="https://huggingface.co/papers/2504.02154"><img src="https://img.shields.io/static/v1?label=HuggingFace&message=Paper&color=green" height=20.5></a> 
-
 </h5>
 
+<div align="center" style="padding: 15px; background-color: #f0f7fb; border-left: 5px solid #3498db; margin: 20px 0; border-radius: 3px;">
+  <b>💡 Where and why you should apply Frequency Scaling in diffusion models.</b>
+</div>
+
 <p align="center">
-  <img src="assets/teaser.png" alt="FreSca teaser figure" width="100%">
+  <video width="80%" controls>
+    <source src="assets/demo.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <br>
+  <em>FreSca: Enhancing video diffusion models through frequency space scaling</em>
 </p>
+
+## 📋 Overview
+
+FreSca is a novel frequency scaling approach that enhances diffusion models without additional training. By manipulating the frequency space of latent representations, FreSca improves generation quality across multiple tasks including image generation, video generation, depth estimation, and image editing.
+
+Our key findings:
+- Frequency scaling improves visual quality with minimal computational overhead
+- Energy-based cutoff strategy provides stable and consistent improvements
+- Compatible with existing diffusion models as a plug-and-play enhancement
 
 ## 📰 News
 
-- **[2025-04]** 🔥🔥 Exciting discovery! **FreSca** boosts video diffusion models' performance without training! Preliminary [VideoCrafter2](https://github.com/AILab-CVC/VideoCrafter) results added. Suggestions for new tasks are welcome—gallery updates coming soon 🚀🚀
-
-* **[2025.04]** 🔥🔥 Released example implemenation for **FreSca**.
+- **[2025-05]** 🔥 **Major Update!** Our new version reveals the optimal locations for frequency scaling, showing improvements across image generation, video synthesis, depth estimation, and editing tasks. New energy-based cutoff technique delivers superior stability!
+- **[2025-04]** Exciting discovery! **FreSca** boosts video diffusion models' performance without training! Preliminary [VideoCrafter2](https://github.com/AILab-CVC/VideoCrafter) results added.
+- **[2025-04]** Released example implementation for **FreSca**.
 
 ## 🎬 Gallery
 
@@ -33,128 +51,113 @@
 
 <table>
 <tr>
-    <td colspan="3" align="center"><b>VideoCrafter2 (Original)</b></td>
+    <td colspan="5" align="center"><b>VideoCrafter2: Original vs FreSca</b></td>
 </tr>
 <tr>
-    <td><a href="demo/VideoCrafter2/Origin/0001.mp4"><img src="demo/VideoCrafter2/Origin/0001.gif" width="100%"></a></td>
-    <td><a href="demo/VideoCrafter2/Origin/0004.mp4"><img src="demo/VideoCrafter2/Origin/0004.gif" width="100%"></a></td>
-    <td><a href="demo/VideoCrafter2/Origin/0005.mp4"><img src="demo/VideoCrafter2/Origin/0005.gif" width="100%"></a></td>
+    <td align="center"><b>Original</b></td>
+    <td align="center"><b></b></td>
+    <td align="center"><b></b></td>
+    <td align="center"><b></b></td>
+    <td align="center"><b></b></td>
 </tr>
 <tr>
-    <td colspan="3" align="center"><b>VideoCrafter2 + FreSca</b></td>
+    <td>
+        <video width="100%" controls>
+            <source src="./demo/VideoCrafter2/Origin1/0006.mp4" type="video/mp4">
+        </video>
+    </td>
+    <td>
+        <video width="100%" controls>
+            <source src="./demo/VideoCrafter2/Origin1/0007.mp4" type="video/mp4">
+        </video>
+    </td>
+    <td>
+        <video width="100%" controls>
+            <source src="./demo/VideoCrafter2/Origin1/0008.mp4" type="video/mp4">
+        </video>
+    </td>
+    <td>
+        <video width="100%" controls>
+            <source src="./demo/VideoCrafter2/Origin1/0010.mp4" type="video/mp4">
+        </video>
+    </td>
+    <td>
+        <video width="100%" controls>
+            <source src="./demo/VideoCrafter2/Origin/0001.mp4" type="video/mp4">
+        </video>
+    </td>
 </tr>
 <tr>
-    <td><a href="demo/VideoCrafter2/Fresca/0001.mp4"><img src="demo/VideoCrafter2/Fresca/0001.gif" width="100%"></a></td>
-    <td><a href="demo/VideoCrafter2/Fresca/0004.mp4"><img src="demo/VideoCrafter2/Fresca/0004.gif" width="100%"></a></td>
-    <td><a href="demo/VideoCrafter2/Fresca/0005.mp4"><img src="demo/VideoCrafter2/Fresca/0005.gif" width="100%"></a></td>
+    <td align="center"><b>FreSca</b></td>
+    <td align="center"><b></b></td>
+    <td align="center"><b></b></td>
+    <td align="center"><b></b></td>
+    <td align="center"><b></b></td>
 </tr>
 <tr>
-    <td align="center"><i>"A tiger walks in the forest, photorealistic, 4k, high definition"</i></td>
-    <td align="center"><i>"A child excitedly swings on a rusty swing set, laughter filling the air"</i></td>
-    <td align="center"><i>"A young woman with glasses is jogging in the park wearing a pink headband"</i></td>
+    <td>
+        <video width="100%" controls>
+            <source src="./demo/VideoCrafter2/Fresca1/0006.mp4" type="video/mp4">
+        </video>
+        <div align="center"><i>"A motorcycle riding along a desert highway, sand dunes stretching beside"</i></div>
+    </td>
+    <td>
+        <video width="100%" controls>
+            <source src="./demo/VideoCrafter2/Fresca1/0007.mp4" type="video/mp4">
+        </video>
+        <div align="center"><i>"Lanterns drifting into the night sky, a calm lake mirroring their glow"</i></div>
+    </td>
+    <td>
+        <video width="100%" controls>
+            <source src="./demo/VideoCrafter2/Fresca1/0008.mp4" type="video/mp4">
+        </video>
+        <div align="center"><i>"A train winding through sunflower fields, bright yellow blooms on both sides"</i></div>
+    </td>
+    <td>
+        <video width="100%" controls>
+            <source src="./demo/VideoCrafter2/Fresca1/0010.mp4" type="video/mp4">
+        </video>
+        <div align="center"><i>"A campfire on a lakeshore, stars sparkling in the dark sky"</i></div>
+    </td>
+    <td>
+        <video width="100%" controls>
+            <source src="./demo/VideoCrafter2/Fresca/0001.mp4" type="video/mp4">
+        </video>
+        <div align="center"><i>"A tiger walks in the forest, photorealistic, 4k, high definition"</i></div>
+    </td>
 </tr>
 </table>
 
-<p align="left"><i>Click on any GIF to view the full MP4 video.</i></p>
+<p align="left"><i>In each pair, top: Original, bottom: with FreSca</i></p>
 
-## 🖥️ Demo
 
-* You can try the demo applications in ``demo/*``.
+### Depth Estimation Results
 
-## 🤖 FreSca Implementation
-```python
-import torch
-import torch.fft as fft
+<div align="center">
+  <img src="./assets/image_depth.png" width="100%" alt="Depth Estimation Comparison">
+  <p><i>FreSca enhances depth estimation quality by preserving fine details and improving edge accuracy.</i></p>
+</div>
 
-def Fourier_filter(x, scale_low=1.0, scale_high=1.5, freq_cutoff=20):
-    """
-    Apply frequency-dependent scaling to an image tensor using Fourier transforms.
-    
-    Parameters:
-        x:           Input tensor of shape (B, C, H, W)
-        scale_low:   Scaling factor for low-frequency components (default: 1.0)
-        scale_high:  Scaling factor for high-frequency components (default: 1.5)
-        freq_cutoff: Number of frequency indices around center to consider as low-frequency (default: 20)
-    
-    Returns:
-        x_filtered: Filtered version of x in spatial domain with frequency-specific scaling applied.
-    """
-    # Preserve input dtype and device
-    dtype, device = x.dtype, x.device
-    
-    # Convert to float32 for FFT computations
-    x = x.to(torch.float32)
-    
-    # 1) Apply FFT and shift low frequencies to center
-    x_freq = fft.fftn(x, dim=(-2, -1))
-    x_freq = fft.fftshift(x_freq, dim=(-2, -1))
+## 🤖 Implementation
 
-    # 2) Create a mask to scale frequencies differently
-    B, C, H, W = x_freq.shape
-    crow, ccol = H // 2, W // 2
-    
-    # Initialize mask with high-frequency scaling factor
-    mask = torch.ones((B, C, H, W), device=device) * scale_high
-    
-    # Apply low-frequency scaling factor to center region
-    mask[..., crow - freq_cutoff : crow + freq_cutoff,
-         ccol - freq_cutoff : ccol + freq_cutoff] = scale_low
+The core implementation is available in `core/fresca.py` and can be easily integrated into any diffusion model.
 
-    # 3) Apply frequency-specific scaling
-    x_freq = x_freq * mask
-    
-    # 4) Convert back to spatial domain
-    x_freq = fft.ifftshift(x_freq, dim=(-2, -1))
-    x_filtered = fft.ifftn(x_freq, dim=(-2, -1)).real
-    
-    # 5) Restore original dtype
-    x_filtered = x_filtered.to(dtype)
-    
-    return x_filtered
-```
+### Key Components
 
-## 🚀 Integration with Diffusion Models
-To integrate FreSca into your diffusion model pipeline, apply the Fourier filter to the noise prediction during the denoising process:
+1. **Frequency Space Transformation**: Convert latent features to frequency domain using FFT
+2. **Selective Scaling**: Apply customizable scaling to low- or high-frequency components
+3. **Energy-based Cutoff**: Adaptive boundary determination for frequency scaling
 
-```python
-class DiffusionModel:
-    def denoise_step(self, x_t, t, guidance_scale=7.5):
-        # Standard diffusion model denoising step
-        
-        # For classifier-free guidance
-        if guidance_scale > 1.0:
-            # Get conditional and unconditional noise predictions
-            cond_noise_pred = self.unet(x_t, t, context)
-            uncond_noise_pred = self.unet(x_t, t, null_context)
-            
-            # Apply FreSca to the guidance component
-            noise_diff = cond_noise_pred - uncond_noise_pred
-            noise_diff = Fourier_filter(
-                noise_diff, 
-                scale_low=1.0,   # Preserve low frequencies
-                scale_high=1.5,  # Boost high frequencies
-                freq_cutoff=20
-            )
-            
-            # Combine predictions with guidance scale
-            noise_pred = uncond_noise_pred + guidance_scale * noise_diff
-        else:
-            # Single forward pass
-            noise_pred = self.unet(x_t, t, context)
-            noise_pred = Fourier_filter(noise_pred)
-        
-        # Continue with the rest of the denoising step...
-```
+### Recommended Parameters
 
-## ✅ ToDo
-- [x] Add implementation for the core algorithm
-- [x] Update demo for image editing (e.g., LEdits++)
-- [x] Update demo for diffusion-based image depth estimation (e.g., Marigold)
-- [x] Add gallery section with VideoCrafter2 video generation results
+- **Cutoff ratio**: 0.5~0.9 (energy-based approach)
+- **High-frequency scaling factor**: 1.0 < h < 1.5
+- **Position**: Apply the nosie predictions
 
-- [ ] Include more applications...
+Find more example implementations in the `demo/` directory.
 
 ## 📑 Citation
+
 If you use this code for your research, please cite our work:
 ```
 @article{huang2025fresca,
@@ -164,3 +167,7 @@ If you use this code for your research, please cite our work:
         year={2025}
 }
 ```
+
+## 📧 Contact
+
+For questions or feedback, please open an issue on GitHub or contact the authors directly.
