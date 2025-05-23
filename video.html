@@ -1,0 +1,545 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FreSca Video Gallery</title>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  <style>
+    /* Custom styles for improved gallery */
+    :root {
+      --primary-color: #3273dc;
+      --dark-color: #363636;
+      --light-bg: #f5f5f5;
+      --primary-light: #ebf2ff;
+      --transition-speed: 0.3s;
+    }
+    
+    body {
+      font-family: 'Google Sans', 'Noto Sans', sans-serif;
+      background-color: #fff;
+    }
+    
+    .video-gallery-section {
+      padding: 2rem 0;
+      background-color: var(--light-bg);
+      border-radius: 1rem;
+      margin: 2rem 0;
+    }
+    
+    .gallery-title {
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: var(--dark-color);
+      font-size: 1.75rem;
+    }
+    
+    .video-container {
+      position: relative;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+      background-color: #fff;
+      margin-bottom: 1rem;
+    }
+    
+    .video-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    .video-wrapper {
+      position: relative;
+      padding-top: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      background-color: #000;
+    }
+    
+    .video-wrapper video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .video-prompt {
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: var(--dark-color);
+      background-color: #fff;
+      line-height: 1.4;
+    }
+
+    .tag.model-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 10;
+      font-weight: 600;
+      border-radius: 1rem;
+      padding: 0.5rem 1rem;
+      opacity: 0.9;
+    }
+    
+    .tag.model-tag.is-dark {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    
+    .tag.model-tag.is-primary {
+      background-color: var(--primary-color);
+    }
+    
+    .controls-container {
+      background-color: #fff;
+      padding: 1rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2rem;
+    }
+    
+    .slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 8px;
+      border-radius: 4px;
+      background: #e0e0e0;
+      outline: none;
+      transition: background var(--transition-speed);
+    }
+    
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      cursor: pointer;
+      transition: transform var(--transition-speed);
+    }
+    
+    .slider::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      cursor: pointer;
+      transition: transform var(--transition-speed);
+    }
+    
+    .slider::-webkit-slider-thumb:hover,
+    .slider::-moz-range-thumb:hover {
+      transform: scale(1.2);
+    }
+    
+    .nav-button {
+      border-radius: 2rem;
+      padding: 0.5rem 1rem;
+      transition: all var(--transition-speed);
+      border: 2px solid var(--primary-color);
+    }
+    
+    .nav-button:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .current-prompt-display {
+      background-color: var(--primary-light);
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      margin-top: 1rem;
+      font-style: italic;
+      display: flex;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+    
+    .current-prompt-display .icon {
+      margin-right: 0.5rem;
+      color: var(--primary-color);
+    }
+    
+    .video-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    @media screen and (min-width: 768px) {
+      .video-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media screen and (min-width: 1024px) {
+      .video-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    .comparison-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    @media screen and (min-width: 1024px) {
+      .comparison-container {
+        flex-direction: row;
+      }
+      
+      .video-column {
+        flex: 1;
+      }
+    }
+    
+    .video-count-badge {
+      background-color: var(--primary-light);
+      color: var(--primary-color);
+      border-radius: 1rem;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      margin-left: 0.5rem;
+    }
+    
+    .video-count-badge .icon {
+      margin-right: 0.25rem;
+    }
+    
+    .toggle-play-all {
+      margin-bottom: 1rem;
+      border-radius: 1rem;
+      font-weight: 500;
+    }
+    
+    .info-text {
+      background-color: #f8f9fa;
+      border-left: 4px solid var(--primary-color);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+      border-radius: 0 0.5rem 0.5rem 0;
+    }
+  </style>
+</head>
+<body>
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        
+        <!-- Section Title -->
+        <h2 class="title is-3 has-text-centered mb-5">Text to Video Generation Refinement with FreSca - VideoCrafter2</h2>
+        
+        <!-- Controls Container -->
+        <div class="controls-container">
+          <div class="columns is-vcentered">
+            <div class="column">
+              <h4 class="is-size-5 has-text-weight-bold mb-3">
+                Video Navigation
+                <span class="video-count-badge">
+                  <span class="icon is-small">
+                    <i class="fas fa-film"></i>
+                  </span>
+                  <span id="current-position">1</span>/<span id="total-videos">13</span>
+                </span>
+              </h4>
+            </div>
+            <div class="column is-narrow">
+              <button class="button toggle-play-all is-primary is-light" id="play-all-btn">
+                <span class="icon">
+                  <i class="fas fa-play"></i>
+                </span>
+                <span>Play All</span>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Slider Control -->
+          <input type="range" min="0" max="4" value="0" class="slider" id="video-slider">
+          
+          <!-- Current Prompt Display -->
+          <div class="current-prompt-display">
+            <span class="icon">
+              <i class="fas fa-quote-left"></i>
+            </span>
+            <span id="current-prompt"></span>
+          </div>
+          
+          <!-- Navigation Buttons -->
+          <div class="columns mt-3">
+            <div class="column is-6">
+              <button class="button nav-button is-fullwidth" id="prev-video">
+                <span class="icon">
+                  <i class="fas fa-chevron-left"></i>
+                </span>
+                <span>Previous</span>
+              </button>
+            </div>
+            <div class="column is-6">
+              <button class="button nav-button is-primary is-fullwidth" id="next-video">
+                <span>Next</span>
+                <span class="icon">
+                  <i class="fas fa-chevron-right"></i>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Video Comparison Container -->
+        <div class="comparison-container">
+          <!-- Original Videos Column -->
+          <div class="video-column">
+            <h4 class="title is-5 mb-3">VideoCrafter2</h4>
+            <div class="video-container">
+              <span class="tag model-tag is-dark">Original</span>
+              <div class="video-wrapper">
+                <video id="original-video" controls loop muted playsinline>
+                  <source src="" type="video/mp4">
+                </video>
+              </div>
+              <div class="video-prompt" id="original-prompt"></div>
+            </div>
+          </div>
+          
+          <!-- FreSca Enhanced Videos Column -->
+          <div class="video-column">
+            <h4 class="title is-5 mb-3">VideoCrafter2 + FreSca</h4>
+            <div class="video-container">
+              <span class="tag model-tag is-primary">Enhanced</span>
+              <div class="video-wrapper">
+                <video id="fresca-video" controls loop muted playsinline>
+                  <source src="" type="video/mp4">
+                </video>
+              </div>
+              <div class="video-prompt" id="fresca-prompt"></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Info Text -->
+        <div class="info-text">
+          <p><strong>FreSca Enhancement:</strong> FreSca enhances video generation quality without model retraining, improving fidelity, detail, and visual consistency by applying frequency-space scaling to the diffusion process.</p>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Video data
+  const videoData = [
+    {
+      prompt: "A motorcycle riding along a desert highway, sand dunes stretching beside",
+      originalSrc: "./images/videocrafter/Origin1/0006.mp4",
+      frescaSrc: "./images/videocrafter/Fresca1/0006.mp4"
+    },
+    {
+      prompt: "Lanterns drifting into the night sky, a calm lake mirroring their glow",
+      originalSrc: "./images/videocrafter/Origin1/0007.mp4",
+      frescaSrc: "./images/videocrafter/Fresca1/0007.mp4"
+    },
+    {
+      prompt: "A train winding through sunflower fields, bright yellow blooms on both sides",
+      originalSrc: "./images/videocrafter/Origin1/0008.mp4",
+      frescaSrc: "./images/videocrafter/Fresca1/0008.mp4"
+    },
+    {
+      prompt: "A campfire on a lakeshore, stars sparkling in the dark sky",
+      originalSrc: "./images/videocrafter/Origin1/0010.mp4",
+      frescaSrc: "./images/videocrafter/Fresca1/0010.mp4"
+    },
+    {
+      prompt: "A tiger walks in the forest, photorealistic, 4k, high definition",
+      originalSrc: "./images/videocrafter/Origin/0001.mp4",
+      frescaSrc: "./images/videocrafter/Fresca/0001.mp4"
+    }
+  ];
+
+  // DOM Elements
+  const originalVideo = document.getElementById('original-video');
+  const frescaVideo = document.getElementById('fresca-video');
+  const originalPrompt = document.getElementById('original-prompt');
+  const frescaPrompt = document.getElementById('fresca-prompt');
+  const currentPrompt = document.getElementById('current-prompt');
+  const slider = document.getElementById('video-slider');
+  const prevButton = document.getElementById('prev-video');
+  const nextButton = document.getElementById('next-video');
+  const currentPosition = document.getElementById('current-position');
+  const totalVideos = document.getElementById('total-videos');
+  const thumbnailsGrid = document.getElementById('thumbnails-grid');
+  const playAllBtn = document.getElementById('play-all-btn');
+  
+  let currentIndex = 0;
+  let isPlayingAll = true; // Changed to true for default play all
+  
+  // Initialize play button state to "Pause All" since we're playing by default
+  playAllBtn.innerHTML = `
+    <span class="icon">
+      <i class="fas fa-pause"></i>
+    </span>
+    <span>Pause All</span>
+  `;
+  
+  // Set total videos
+  totalVideos.textContent = videoData.length;
+  
+  // Initialize video sources and prompts
+  function updateVideos(index) {
+    if (index < 0 || index >= videoData.length) return;
+    
+    currentIndex = index;
+    slider.value = index;
+    currentPosition.textContent = index + 1;
+    
+    const data = videoData[index];
+    
+    // Update sources
+    originalVideo.src = data.originalSrc;
+    frescaVideo.src = data.frescaSrc;
+    
+    // Update prompts
+    originalPrompt.textContent = data.prompt;
+    frescaPrompt.textContent = data.prompt;
+    currentPrompt.textContent = data.prompt;
+    
+    // Load videos
+    originalVideo.load();
+    frescaVideo.load();
+    
+    // Play videos if "Play All" is active
+    if (isPlayingAll) {
+      originalVideo.play();
+      frescaVideo.play();
+    }
+  }
+  
+  // Create thumbnails
+  function createThumbnails() {
+    videoData.forEach((data, index) => {
+      const thumbnailItem = document.createElement('div');
+      thumbnailItem.className = 'thumbnail-item';
+      thumbnailItem.innerHTML = `
+        <div class="video-container" style="cursor: pointer;" data-index="${index}">
+          <div class="video-wrapper">
+            <video muted loop>
+              <source src="${data.frescaSrc}" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-prompt">
+            <strong>#${index + 1}:</strong> ${data.prompt}
+          </div>
+        </div>
+      `;
+      
+      thumbnailItem.querySelector('.video-container').addEventListener('click', () => {
+        updateVideos(index);
+      });
+      
+      thumbnailsGrid.appendChild(thumbnailItem);
+    });
+  }
+  
+  // Toggle play all videos
+  function togglePlayAll() {
+    isPlayingAll = !isPlayingAll;
+    
+    if (isPlayingAll) {
+      playAllBtn.innerHTML = `
+        <span class="icon">
+          <i class="fas fa-pause"></i>
+        </span>
+        <span>Pause All</span>
+      `;
+      originalVideo.play();
+      frescaVideo.play();
+    } else {
+      playAllBtn.innerHTML = `
+        <span class="icon">
+          <i class="fas fa-play"></i>
+        </span>
+        <span>Play All</span>
+      `;
+      originalVideo.pause();
+      frescaVideo.pause();
+    }
+  }
+  
+  // Event listeners
+  slider.addEventListener('input', () => {
+    updateVideos(parseInt(slider.value));
+  });
+  
+  prevButton.addEventListener('click', () => {
+    if (currentIndex > 0) {
+      updateVideos(currentIndex - 1);
+    }
+  });
+  
+  nextButton.addEventListener('click', () => {
+    if (currentIndex < videoData.length - 1) {
+      updateVideos(currentIndex + 1);
+    }
+  });
+  
+  playAllBtn.addEventListener('click', togglePlayAll);
+  
+  // Handle keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      if (currentIndex > 0) {
+        updateVideos(currentIndex - 1);
+      }
+    } else if (e.key === 'ArrowRight') {
+      if (currentIndex < videoData.length - 1) {
+        updateVideos(currentIndex + 1);
+      }
+    } else if (e.key === ' ') {
+      // Space bar toggles play/pause
+      togglePlayAll();
+      e.preventDefault();
+    }
+  });
+  
+  // When one video ends during "Play All" mode
+  originalVideo.addEventListener('ended', () => {
+    if (isPlayingAll && currentIndex < videoData.length - 1) {
+      updateVideos(currentIndex + 1);
+    }
+  });
+  
+  // Initialize with first video
+  updateVideos(0);
+  
+  // Create thumbnails
+  createThumbnails();
+  
+  // Create hover effect for thumbnails
+  const thumbnailVideos = document.querySelectorAll('#thumbnails-grid video');
+  thumbnailVideos.forEach(video => {
+    const container = video.closest('.video-container');
+    
+    container.addEventListener('mouseenter', () => {
+      video.play();
+    });
+    
+    container.addEventListener('mouseleave', () => {
+      video.pause();
+    });
+  });
+});
+</script>
+</body>
+</html>
