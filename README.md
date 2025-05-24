@@ -63,27 +63,27 @@ Our key findings:
 <tr>
     <td>
         <video width="100%" controls>
-            <source src="./demo/VideoCrafter2/Origin1/0006.mp4" type="video/mp4">
+            <source src="https://wikichao.github.io/FreSca/images/videocrafter/Origin1/0006.mp4" type="video/mp4">
         </video>
     </td>
     <td>
         <video width="100%" controls>
-            <source src="./demo/VideoCrafter2/Origin1/0007.mp4" type="video/mp4">
+            <source src="https://wikichao.github.io/FreSca/images/videocrafter/Origin1/0007.mp4" type="video/mp4">
         </video>
     </td>
     <td>
         <video width="100%" controls>
-            <source src="./demo/VideoCrafter2/Origin1/0008.mp4" type="video/mp4">
+            <source src="https://wikichao.github.io/FreSca/images/videocrafter/Origin1/0008.mp4" type="video/mp4">
         </video>
     </td>
     <td>
         <video width="100%" controls>
-            <source src="./demo/VideoCrafter2/Origin1/0010.mp4" type="video/mp4">
+            <source src="https://wikichao.github.io/FreSca/images/videocrafter/Origin1/0010.mp4" type="video/mp4">
         </video>
     </td>
     <td>
         <video width="100%" controls>
-            <source src="./demo/VideoCrafter2/Origin/0001.mp4" type="video/mp4">
+            <source src="https://wikichao.github.io/FreSca/images/videocrafter/Origin/0001.mp4" type="video/mp4">
         </video>
     </td>
 </tr>
@@ -97,31 +97,31 @@ Our key findings:
 <tr>
     <td>
         <video width="100%" controls>
-            <source src="./demo/VideoCrafter2/Fresca1/0006.mp4" type="video/mp4">
+            <source src="https://wikichao.github.io/FreSca/images/videocrafter/Fresca1/0006.mp4" type="video/mp4">
         </video>
         <div align="center"><i>"A motorcycle riding along a desert highway, sand dunes stretching beside"</i></div>
     </td>
     <td>
         <video width="100%" controls>
-            <source src="./demo/VideoCrafter2/Fresca1/0007.mp4" type="video/mp4">
+            <source src="https://wikichao.github.io/FreSca/images/videocrafter/Fresca1/0007.mp4" type="video/mp4">
         </video>
         <div align="center"><i>"Lanterns drifting into the night sky, a calm lake mirroring their glow"</i></div>
     </td>
     <td>
         <video width="100%" controls>
-            <source src="./demo/VideoCrafter2/Fresca1/0008.mp4" type="video/mp4">
+            <source src="https://wikichao.github.io/FreSca/images/videocrafter/Fresca1/0008.mp4" type="video/mp4">
         </video>
         <div align="center"><i>"A train winding through sunflower fields, bright yellow blooms on both sides"</i></div>
     </td>
     <td>
         <video width="100%" controls>
-            <source src="./demo/VideoCrafter2/Fresca1/0010.mp4" type="video/mp4">
+            <source src="https://wikichao.github.io/FreSca/images/videocrafter/Fresca1/0010.mp4" type="video/mp4">
         </video>
         <div align="center"><i>"A campfire on a lakeshore, stars sparkling in the dark sky"</i></div>
     </td>
     <td>
         <video width="100%" controls>
-            <source src="./demo/VideoCrafter2/Fresca/0001.mp4" type="video/mp4">
+            <source src="https://wikichao.github.io/FreSca/images/videocrafter/Fresca/0001.mp4" type="video/mp4">
         </video>
         <div align="center"><i>"A tiger walks in the forest, photorealistic, 4k, high definition"</i></div>
     </td>
