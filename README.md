@@ -32,12 +32,11 @@
 
 ## 📋 Overview
 
-FreSca is a novel frequency scaling approach that enhances diffusion models without additional training. By manipulating the frequency space of latent representations, FreSca improves generation quality across multiple tasks including image generation, video generation, depth estimation, and image editing.
-
+FreSca is a novel frequency scaling approach that enhances diffusion models without additional training.
 Our key findings:
 - Frequency scaling improves visual quality with minimal computational overhead
 - Energy-based cutoff strategy provides stable and consistent improvements
-- Compatible with existing diffusion models as a plug-and-play enhancement
+- Compatible with existing diffusion models as a plug-and-play enhancement (image generation, video generation, depth estimation, image editing)
 
 ## 📰 News
 
