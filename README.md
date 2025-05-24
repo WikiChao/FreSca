@@ -21,14 +21,14 @@
   <b>💡 Where and why you should apply Frequency Scaling in diffusion models.</b>
 </div>
 
-<p align="center">
+<!-- <p align="center">
   <video width="80%" controls>
     <source src="./assets/demo.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
   <br>
   <em>FreSca: Enhancing video diffusion models through frequency space scaling</em>
-</p>
+</p> -->
 
 ## 📋 Overview
 
@@ -54,81 +54,73 @@ Our key findings:
     <td colspan="5" align="center"><b>VideoCrafter2: Original vs FreSca</b></td>
 </tr>
 <tr>
-    <td align="center"><b>Original</b></td>
-    <td align="center"><b></b></td>
-    <td align="center"><b></b></td>
-    <td align="center"><b></b></td>
-    <td align="center"><b></b></td>
+    <td colspan="5" align="center"><b>Original</b></td>
 </tr>
 <tr>
     <td>
-        <video width="100%" controls>
-            <source src="https://wikichao.github.io/FreSca/images/videocrafter/Origin1/0006.mp4" type="video/mp4">
-        </video>
+        <a href="./demo/VideoCrafter2/Origin1/0006.mp4">
+            <img src="./demo/VideoCrafter2/Origin1/0006.gif" width="100%">
+        </a>
     </td>
     <td>
-        <video width="100%" controls>
-            <source src="https://wikichao.github.io/FreSca/images/videocrafter/Origin1/0007.mp4" type="video/mp4">
-        </video>
+        <a href="./demo/VideoCrafter2/Origin1/0007.mp4">
+            <img src="./demo/VideoCrafter2/Origin1/0007.gif" width="100%">
+        </a>
     </td>
     <td>
-        <video width="100%" controls>
-            <source src="https://wikichao.github.io/FreSca/images/videocrafter/Origin1/0008.mp4" type="video/mp4">
-        </video>
+        <a href="./demo/VideoCrafter2/Origin1/0008.mp4">
+            <img src="./demo/VideoCrafter2/Origin1/0008.gif" width="100%">
+        </a>
     </td>
     <td>
-        <video width="100%" controls>
-            <source src="https://wikichao.github.io/FreSca/images/videocrafter/Origin1/0010.mp4" type="video/mp4">
-        </video>
+        <a href="./demo/VideoCrafter2/Origin1/0010.mp4">
+            <img src="./demo/VideoCrafter2/Origin1/0010.gif" width="100%">
+        </a>
     </td>
     <td>
-        <video width="100%" controls>
-            <source src="https://wikichao.github.io/FreSca/images/videocrafter/Origin/0001.mp4" type="video/mp4">
-        </video>
+        <a href="./demo/VideoCrafter2/Origin/0001.mp4">
+            <img src="./demo/VideoCrafter2/Origin/0001.gif" width="100%">
+        </a>
     </td>
 </tr>
 <tr>
-    <td align="center"><b>FreSca</b></td>
-    <td align="center"><b></b></td>
-    <td align="center"><b></b></td>
-    <td align="center"><b></b></td>
-    <td align="center"><b></b></td>
+    <td colspan="5" align="center"><b>FreSca</b></td>
 </tr>
 <tr>
     <td>
-        <video width="100%" controls>
-            <source src="https://wikichao.github.io/FreSca/images/videocrafter/Fresca1/0006.mp4" type="video/mp4">
-        </video>
+        <a href="./demo/VideoCrafter2/Fresca1/0006.mp4">
+            <img src="./demo/VideoCrafter2/Fresca1/0006.gif" width="100%">
+        </a>
         <div align="center"><i>"A motorcycle riding along a desert highway, sand dunes stretching beside"</i></div>
     </td>
     <td>
-        <video width="100%" controls>
-            <source src="https://wikichao.github.io/FreSca/images/videocrafter/Fresca1/0007.mp4" type="video/mp4">
-        </video>
+        <a href="./demo/VideoCrafter2/Fresca1/0007.mp4">
+            <img src="./demo/VideoCrafter2/Fresca1/0007.gif" width="100%">
+        </a>
         <div align="center"><i>"Lanterns drifting into the night sky, a calm lake mirroring their glow"</i></div>
     </td>
     <td>
-        <video width="100%" controls>
-            <source src="https://wikichao.github.io/FreSca/images/videocrafter/Fresca1/0008.mp4" type="video/mp4">
-        </video>
+        <a href="./demo/VideoCrafter2/Fresca1/0008.mp4">
+            <img src="./demo/VideoCrafter2/Fresca1/0008.gif" width="100%">
+        </a>
         <div align="center"><i>"A train winding through sunflower fields, bright yellow blooms on both sides"</i></div>
     </td>
     <td>
-        <video width="100%" controls>
-            <source src="https://wikichao.github.io/FreSca/images/videocrafter/Fresca1/0010.mp4" type="video/mp4">
-        </video>
+        <a href="./demo/VideoCrafter2/Fresca1/0010.mp4">
+            <img src="./demo/VideoCrafter2/Fresca1/0010.gif" width="100%">
+        </a>
         <div align="center"><i>"A campfire on a lakeshore, stars sparkling in the dark sky"</i></div>
     </td>
     <td>
-        <video width="100%" controls>
-            <source src="https://wikichao.github.io/FreSca/images/videocrafter/Fresca/0001.mp4" type="video/mp4">
-        </video>
+        <a href="./demo/VideoCrafter2/Fresca/0001.mp4">
+            <img src="./demo/VideoCrafter2/Fresca/0001.gif" width="100%">
+        </a>
         <div align="center"><i>"A tiger walks in the forest, photorealistic, 4k, high definition"</i></div>
     </td>
 </tr>
 </table>
 
-<p align="left"><i>In each pair, top: Original, bottom: with FreSca</i></p>
+<p align="left"><i>Click on any GIF to view the full MP4 video.</i></p>
 
 
 ### Depth Estimation Results
