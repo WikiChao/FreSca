@@ -9,7 +9,7 @@
   <a href="https://www.cs.rochester.edu/~cxu22/" target="_blank" rel="noopener noreferrer">Chenliang Xu</a><br>
 </h5>
 <h5 align="center" style="color:gray">
-  University of Rochester, Netflix Eyeline Studios, The University of Texas at Dallas
+  University of Rochester, Hong Kong University of Science and Technology, The University of Texas at Dallas
 </h5>
 <h5 align="center"> If our project helps you, please give us a star ⭐ on GitHub to support us. </h5>
 
