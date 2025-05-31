@@ -14,7 +14,7 @@
 <h5 align="center"> If our project helps you, please give us a star ⭐ on GitHub to support us. </h5>
 
 <h5 align="center">
-<a href="https://wikichao.github.io/FreSca/"><img src="https://img.shields.io/static/v1?label=Project&message=Website&color=red" height=20.5></a>  <a href="https://arxiv.org/pdf/2504.02154"><img src="https://img.shields.io/badge/arXiv-FreSca-b31b1b.svg" height=20.5></a> <a href="https://huggingface.co/papers/2504.02154"><img src="https://img.shields.io/static/v1?label=HuggingFace&message=Paper&color=green" height=20.5></a> 
+<a href="https://wikichao.github.io/FreSca/"><img src="https://img.shields.io/static/v1?label=Project&message=Website&color=red" height=20.5></a>  <a href="https://arxiv.org/pdf/2504.02154"><img src="https://img.shields.io/badge/arXiv-FreSca-b31b1b.svg" height=20.5></a> <a href="https://huggingface.co/papers/2504.02154"><img src="https://img.shields.io/static/v1?label=HuggingFace&message=Paper&color=green" height=20.5></a> <img src="https://visitor-badge.laobi.icu/badge?page_id=WikiChao.FreSca" alt="访客统计" /> <img src="https://img.shields.io/github/stars/WikiChao/FreSca?style=social" alt="GitHub stars" /> <img alt="Static Badge" src="https://img.shields.io/badge/license-MIT%20-blue.svg" /> 
 </h5>
 
 <div align="center" style="padding: 15px; background-color: #f0f7fb; border-left: 5px solid #3498db; margin: 20px 0; border-radius: 3px;">
